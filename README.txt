@@ -15,3 +15,10 @@
 - پاک‌سازی و یکپارچه‌سازی CSS بدون تغییر عمدی در ظاهر کلی.
 - بهبود متادیتای SEO و اشتراک‌گذاری اجتماعی.
 - حفظ تمام تصاویر، صوت‌ها، ویدئو و لینک کانال ایتا.
+
+
+SEO V9:
+- Added canonical URL, improved meta description and social metadata.
+- Added Schema.org WebSite + Person structured data.
+- Added sitemap.xml and linked it from robots.txt.
+- Next step: add this site to Google Search Console and submit the sitemap.
