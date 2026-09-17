@@ -91,3 +91,15 @@ footer a{color:#c9a24b;text-decoration:none}
   .eitaa .btn{width:100%;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu a,.btn,.gallery-item img{transition:none}}
+
+/* Aparat featured video */
+.video-aparat{display:block;padding:16px;overflow:hidden}
+.aparat-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
+.aparat-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.aparat-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.aparat-actions .btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+@media (max-width:600px){
+  .video-aparat{padding:10px}
+  .aparat-actions{flex-direction:column}
+  .aparat-actions .btn{width:100%}
+}
