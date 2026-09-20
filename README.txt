@@ -1,24 +1,23 @@
-کربلایی حسین اردستانی — نسخه v8
+پایگاه رسمی کربلایی حسین اردستانی — نسخه V6 طراحی حسینی
 
-این نسخه برای انتشار به‌صورت سایت استاتیک روی GitHub Pages آماده شده است.
+این بسته فقط شامل یک سایت است و index.html در ریشه قرار دارد.
 
-نحوه انتشار:
-1) محتویات این بسته را در ریشه یک Repository در GitHub قرار دهید؛ فایل index.html باید مستقیماً در ریشه Repository باشد.
-2) در GitHub وارد Settings > Pages شوید.
-3) در بخش Build and deployment، گزینه Deploy from a branch را انتخاب کنید.
-4) Branch موردنظر (معمولاً main) و پوشه / (root) را انتخاب کنید و Save بزنید.
-5) پس از انتشار، آدرس GitHub Pages نمایش داده می‌شود.
+ویژگی‌های این نسخه:
+- طراحی تیره، حسینی، مدرن و RTL
+- هدر مینیمال: لوگوی تصویری سمت چپ و منوی همبرگری سمت راست
+- تصویر جدید مداح در Hero با نمایش عریض و بدون قاب قبلی
+- دسترسی سریع به درباره، صوت، گالری و آپارات
+- دو فایل صوتی داخلی
+- گالری ۹ تصویر
+- بخش معرفی آپارات با دکمه ورود به صفحه رسمی آپارات
+- بخش کانال رسمی ایتا
+- بدون پنل پخش ویدئوی داخلی
+- فوتر با لینک «طراحی توسط خدمات فنی محمد»
+- فایل‌های robots.txt، sitemap.xml و فایل تأیید Google حفظ شده‌اند
 
-اصلاحات v8:
-- رفع خطای Escape در منوی موبایل و بهبود دسترسی‌پذیری منو.
-- اصلاح پسوند تصویر Hero از PNG اشتباه به JPG واقعی.
-- پاک‌سازی و یکپارچه‌سازی CSS بدون تغییر عمدی در ظاهر کلی.
-- بهبود متادیتای SEO و اشتراک‌گذاری اجتماعی.
-- حفظ تمام تصاویر، صوت‌ها، ویدئو و لینک کانال ایتا.
-
-
-SEO V9:
-- Added canonical URL, improved meta description and social metadata.
-- Added Schema.org WebSite + Person structured data.
-- Added sitemap.xml and linked it from robots.txt.
-- Next step: add this site to Google Search Console and submit the sitemap.
+Aparat:
+https://www.aparat.com/hoseinardstani
+Eitaa:
+https://eitaa.com/hosain_Ardestani313
+سایت طراح:
+https://pcmohqm-coder.github.io/pcmohqm
