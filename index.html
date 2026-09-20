@@ -55,8 +55,11 @@
 
 <header class="site-header">
   <div class="wrap header-inner">
+    <div class="header-figures" aria-hidden="true">
+      <img src="assets/header-figures.jpg" alt="">
+    </div>
     <a class="header-calligraphy" href="#top" aria-label="کربلایی حسین اردستانی">
-      <img src="assets/logo-calligraphy.png" alt="کربلایی حسین اردستانی">
+      <img src="assets/header-calligraphy.jpg" alt="کربلایی حسین اردستانی">
     </a>
     <button class="menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="main-nav">
       <span></span><span></span><span></span>
@@ -76,8 +79,13 @@
 <main id="top">
 
 <section class="hero" aria-label="کربلایی حسین اردستانی">
-  <div class="hero-photo">
-    <img class="hero-image" src="assets/hero.jpg" alt="کربلایی حسین اردستانی در حال مداحی" fetchpriority="high">
+  <div class="hero-photo hero-slider" aria-label="تصاویر کربلایی حسین اردستانی">
+    <div class="hero-slide is-active">
+      <img class="hero-image" src="assets/hero.jpg" alt="کربلایی حسین اردستانی در حال مداحی" fetchpriority="high">
+    </div>
+    <div class="hero-slide">
+      <img class="hero-image" src="assets/hero-2.jpg" alt="کربلایی حسین اردستانی در مراسم مذهبی" loading="lazy">
+    </div>
   </div>
   <div class="wrap hero-content-wrap">
     <div class="hero-content">
