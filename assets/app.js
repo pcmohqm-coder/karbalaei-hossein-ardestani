@@ -26,4 +26,16 @@
       closeMenu(true);
     }
   });
+  // Hero: automatic, control-free image slider
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  if (heroSlides.length > 1) {
+    let currentSlide = 0;
+    const showNextSlide = () => {
+      heroSlides[currentSlide].classList.remove('is-active');
+      currentSlide = (currentSlide + 1) % heroSlides.length;
+      heroSlides[currentSlide].classList.add('is-active');
+    };
+    window.setInterval(showNextSlide, 5000);
+  }
+
 })();
