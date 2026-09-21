@@ -54,35 +54,95 @@
   }
 })();
 
-/* Audio library: files can be added later without changing the player markup. */
+/* Audio library: large cover + seekable player, inspired by the reference audio page. */
 (() => {
-  const cards = document.querySelectorAll('[data-audio-card]');
+  const cards = [...document.querySelectorAll('[data-audio-card]')];
   if (!cards.length) return;
   let active = null;
+
+  const format = value => {
+    if (!Number.isFinite(value)) return '00:00';
+    const m = Math.floor(value / 60).toString().padStart(2,'0');
+    const sec = Math.floor(value % 60).toString().padStart(2,'0');
+    return `${m}:${sec}`;
+  };
+
+  const setPlayingUI = (card, playing) => {
+    card.querySelectorAll('.audio-play,.audio-cover-play').forEach(b => {
+      b.textContent = playing ? 'Ⅱ' : '▶';
+      b.disabled = false;
+    });
+    const status = card.querySelector('.audio-status');
+    if (status) status.textContent = playing ? 'در حال پخش' : 'حالت پخش';
+    card.classList.toggle('is-playing', playing);
+  };
+
   cards.forEach(card => {
     const src = card.dataset.src;
-    const btn = card.querySelector('.audio-play');
+    const playButtons = [...card.querySelectorAll('.audio-play,.audio-cover-play')];
     const bar = card.querySelector('.audio-progress-bar');
+    const track = card.querySelector('.audio-progress-large');
     const times = card.querySelectorAll('.audio-times span');
-    if (!src || !btn) return;
-    const audio = new Audio();
+    const reset = card.querySelector('.audio-reset');
+    if (!src || !playButtons.length) return;
+
+    const audio = new Audio(src);
     audio.preload = 'metadata';
-    audio.src = src;
+
+    const play = async () => {
+      if (active && active !== audio) {
+        active.pause();
+        const oldCard = active._card;
+        if (oldCard) setPlayingUI(oldCard, false);
+      }
+      try {
+        await audio.play();
+        active = audio;
+        audio._card = card;
+        setPlayingUI(card, true);
+      } catch (err) {
+        setPlayingUI(card, false);
+      }
+    };
+    const pause = () => { audio.pause(); setPlayingUI(card, false); };
+
     audio.addEventListener('loadedmetadata', () => {
-      btn.disabled = false;
+      playButtons.forEach(b => b.disabled = false);
       if (times[1]) times[1].textContent = format(audio.duration);
     });
     audio.addEventListener('timeupdate', () => {
       const ratio = audio.duration ? audio.currentTime / audio.duration : 0;
       if (bar) bar.style.width = `${ratio * 100}%`;
       if (times[0]) times[0].textContent = format(audio.currentTime);
+      if (track) track.setAttribute('aria-valuenow', Math.round(ratio * 100));
     });
-    audio.addEventListener('ended', () => { btn.textContent = '▶'; if (bar) bar.style.width = '0%'; });
-    btn.addEventListener('click', () => {
-      if (active && active !== audio) { active.pause(); document.querySelectorAll('.audio-play').forEach(b => b.textContent = '▶'); }
-      if (audio.paused) { audio.play(); btn.textContent = 'Ⅱ'; active = audio; }
-      else { audio.pause(); btn.textContent = '▶'; }
+    audio.addEventListener('play', () => setPlayingUI(card, true));
+    audio.addEventListener('pause', () => { if (!audio.ended) setPlayingUI(card, false); });
+    audio.addEventListener('ended', () => {
+      setPlayingUI(card, false);
+      if (bar) bar.style.width = '0%';
+      if (times[0]) times[0].textContent = '00:00';
+      active = null;
     });
+
+    playButtons.forEach(btn => btn.addEventListener('click', () => audio.paused ? play() : pause()));
+    if (reset) reset.addEventListener('click', () => { audio.currentTime = 0; if (!audio.paused) play(); });
+
+    if (track) {
+      const seek = e => {
+        if (!Number.isFinite(audio.duration)) return;
+        const rect = track.getBoundingClientRect();
+        const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+        audio.currentTime = (x / rect.width) * audio.duration;
+      };
+      track.addEventListener('click', seek);
+      track.addEventListener('keydown', e => {
+        if (!Number.isFinite(audio.duration)) return;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + (e.key === 'ArrowRight' ? 5 : -5)));
+        }
+      });
+    }
   });
-  function format(value) { if (!Number.isFinite(value)) return '00:00'; const m = Math.floor(value / 60).toString().padStart(2,'0'); const s = Math.floor(value % 60).toString().padStart(2,'0'); return `${m}:${s}`; }
 })();
