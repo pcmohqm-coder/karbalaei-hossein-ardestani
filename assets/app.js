@@ -53,3 +53,36 @@
     });
   }
 })();
+
+/* Audio library: files can be added later without changing the player markup. */
+(() => {
+  const cards = document.querySelectorAll('[data-audio-card]');
+  if (!cards.length) return;
+  let active = null;
+  cards.forEach(card => {
+    const src = card.dataset.src;
+    const btn = card.querySelector('.audio-play');
+    const bar = card.querySelector('.audio-progress-bar');
+    const times = card.querySelectorAll('.audio-times span');
+    if (!src || !btn) return;
+    const audio = new Audio();
+    audio.preload = 'metadata';
+    audio.src = src;
+    audio.addEventListener('loadedmetadata', () => {
+      btn.disabled = false;
+      if (times[1]) times[1].textContent = format(audio.duration);
+    });
+    audio.addEventListener('timeupdate', () => {
+      const ratio = audio.duration ? audio.currentTime / audio.duration : 0;
+      if (bar) bar.style.width = `${ratio * 100}%`;
+      if (times[0]) times[0].textContent = format(audio.currentTime);
+    });
+    audio.addEventListener('ended', () => { btn.textContent = '▶'; if (bar) bar.style.width = '0%'; });
+    btn.addEventListener('click', () => {
+      if (active && active !== audio) { active.pause(); document.querySelectorAll('.audio-play').forEach(b => b.textContent = '▶'); }
+      if (audio.paused) { audio.play(); btn.textContent = 'Ⅱ'; active = audio; }
+      else { audio.pause(); btn.textContent = '▶'; }
+    });
+  });
+  function format(value) { if (!Number.isFinite(value)) return '00:00'; const m = Math.floor(value / 60).toString().padStart(2,'0'); const s = Math.floor(value % 60).toString().padStart(2,'0'); return `${m}:${s}`; }
+})();
