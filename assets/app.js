@@ -54,95 +54,38 @@
   }
 })();
 
-/* Audio library: large cover + seekable player, inspired by the reference audio page. */
+/* Audio library v14 — reference-style player with waveform, speed, volume, download and favorite controls. */
 (() => {
   const cards = [...document.querySelectorAll('[data-audio-card]')];
   if (!cards.length) return;
   let active = null;
-
-  const format = value => {
-    if (!Number.isFinite(value)) return '00:00';
-    const m = Math.floor(value / 60).toString().padStart(2,'0');
-    const sec = Math.floor(value % 60).toString().padStart(2,'0');
-    return `${m}:${sec}`;
-  };
-
-  const setPlayingUI = (card, playing) => {
-    card.querySelectorAll('.audio-play,.audio-cover-play').forEach(b => {
-      b.textContent = playing ? 'Ⅱ' : '▶';
-      b.disabled = false;
-    });
-    const status = card.querySelector('.audio-status');
-    if (status) status.textContent = playing ? 'در حال پخش' : 'حالت پخش';
+  const format = v => { if (!Number.isFinite(v)) return '00:00'; const m=Math.floor(v/60).toString().padStart(2,'0'); const s=Math.floor(v%60).toString().padStart(2,'0'); return `${m}:${s}`; };
+  const ui = (card, playing) => {
     card.classList.toggle('is-playing', playing);
+    card.querySelectorAll('.main-play-pro,.cover-play-pro').forEach(b => { b.disabled=false; b.textContent=playing?'Ⅱ':'▶'; });
+    const mode=card.querySelector('.mode-pro'); if(mode) mode.textContent=playing?'در حال پخش':'حالت پخش';
   };
-
   cards.forEach(card => {
-    const src = card.dataset.src;
-    const playButtons = [...card.querySelectorAll('.audio-play,.audio-cover-play')];
-    const bar = card.querySelector('.audio-progress-bar');
-    const track = card.querySelector('.audio-progress-large');
-    const times = card.querySelectorAll('.audio-times span');
-    const reset = card.querySelector('.audio-reset');
-    if (!src || !playButtons.length) return;
-
-    const audio = new Audio(src);
-    audio.preload = 'metadata';
-
-    const play = async () => {
-      if (active && active !== audio) {
-        active.pause();
-        const oldCard = active._card;
-        if (oldCard) setPlayingUI(oldCard, false);
-      }
-      try {
-        await audio.play();
-        active = audio;
-        audio._card = card;
-        setPlayingUI(card, true);
-      } catch (err) {
-        setPlayingUI(card, false);
-      }
-    };
-    const pause = () => { audio.pause(); setPlayingUI(card, false); };
-
-    audio.addEventListener('loadedmetadata', () => {
-      playButtons.forEach(b => b.disabled = false);
-      if (times[1]) times[1].textContent = format(audio.duration);
-    });
-    audio.addEventListener('timeupdate', () => {
-      const ratio = audio.duration ? audio.currentTime / audio.duration : 0;
-      if (bar) bar.style.width = `${ratio * 100}%`;
-      if (times[0]) times[0].textContent = format(audio.currentTime);
-      if (track) track.setAttribute('aria-valuenow', Math.round(ratio * 100));
-    });
-    audio.addEventListener('play', () => setPlayingUI(card, true));
-    audio.addEventListener('pause', () => { if (!audio.ended) setPlayingUI(card, false); });
-    audio.addEventListener('ended', () => {
-      setPlayingUI(card, false);
-      if (bar) bar.style.width = '0%';
-      if (times[0]) times[0].textContent = '00:00';
-      active = null;
-    });
-
-    playButtons.forEach(btn => btn.addEventListener('click', () => audio.paused ? play() : pause()));
-    if (reset) reset.addEventListener('click', () => { audio.currentTime = 0; if (!audio.paused) play(); });
-
-    if (track) {
-      const seek = e => {
-        if (!Number.isFinite(audio.duration)) return;
-        const rect = track.getBoundingClientRect();
-        const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-        audio.currentTime = (x / rect.width) * audio.duration;
-      };
-      track.addEventListener('click', seek);
-      track.addEventListener('keydown', e => {
-        if (!Number.isFinite(audio.duration)) return;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-          e.preventDefault();
-          audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + (e.key === 'ArrowRight' ? 5 : -5)));
-        }
-      });
-    }
+    const src=card.dataset.src; if(!src) return;
+    const audio=new Audio(src); audio.preload='metadata'; audio.volume=1;
+    const playBtns=card.querySelectorAll('.main-play-pro,.cover-play-pro');
+    const wave=card.querySelector('.wave-pro'), fill=card.querySelector('.wave-fill');
+    const current=card.querySelector('.current-time'), total=card.querySelector('.total-time');
+    const volume=card.querySelector('.volume-pro input'), speed=card.querySelector('.speed-pro');
+    const reset=card.querySelector('.reset-pro'), fav=card.querySelector('.favorite-pro');
+    const bars=[...card.querySelectorAll('.wave-pro i')];
+    const play=async()=>{ if(active&&active!==audio){active.pause();ui(active._card,false);} try{await audio.play();active=audio;audio._card=card;ui(card,true);}catch(e){ui(card,false);} };
+    const pause=()=>{audio.pause();ui(card,false);};
+    audio.addEventListener('loadedmetadata',()=>{playBtns.forEach(b=>b.disabled=false);if(total)total.textContent=format(audio.duration);});
+    audio.addEventListener('timeupdate',()=>{const r=audio.duration?audio.currentTime/audio.duration:0;if(current)current.textContent=format(audio.currentTime);if(fill)fill.style.width=`${r*100}%`;if(wave){wave.setAttribute('aria-valuenow',Math.round(r*100));bars.forEach((b,i)=>b.style.background=i/bars.length<=r?'#c8a65d':'#554b42');}});
+    audio.addEventListener('play',()=>ui(card,true));
+    audio.addEventListener('pause',()=>{if(!audio.ended)ui(card,false);});
+    audio.addEventListener('ended',()=>{ui(card,false);audio.currentTime=0;if(current)current.textContent='00:00';if(fill)fill.style.width='0%';active=null;bars.forEach(b=>b.style.background='#554b42');});
+    playBtns.forEach(b=>b.addEventListener('click',()=>audio.paused?play():pause()));
+    if(wave){const seek=e=>{if(!Number.isFinite(audio.duration))return;const r=wave.getBoundingClientRect();const x=Math.max(0,Math.min(r.width,e.clientX-r.left));audio.currentTime=(x/r.width)*audio.duration;};wave.addEventListener('click',seek);wave.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();audio.currentTime=Math.max(0,Math.min(audio.duration,audio.currentTime+(e.key==='ArrowRight'?5:-5)));}});}
+    if(volume)volume.addEventListener('input',()=>audio.volume=Number(volume.value));
+    if(speed)speed.addEventListener('click',()=>{const next=audio.playbackRate===1?1.25:audio.playbackRate===1.25?1.5:audio.playbackRate===1.5?.75:1;audio.playbackRate=next;speed.dataset.speed=next;speed.textContent=`${next}×`;});
+    if(reset)reset.addEventListener('click',()=>{audio.currentTime=0;if(current)current.textContent='00:00';if(!audio.paused)play();});
+    if(fav)fav.addEventListener('click',()=>{fav.classList.toggle('is-favorite');fav.firstChild.textContent=fav.classList.contains('is-favorite')?'♥ ':'♡ ';});
   });
 })();
