@@ -57,7 +57,7 @@
   </div>
   <div class="wrap hero-content-wrap"><div class="hero-content">
     <!-- محل تصویر معرفی جدید: پس از دریافت تصویر جدید، فقط همین بخش با آن تصویر جایگزین می‌شود. -->
-    <div class="hero-kicker"><span></span> پایگاه رسمی • نشر آثار کربلایی حسین اردستانی</div>
+    <div class="hero-kicker hero-kicker-image"><img src="assets/header-kicker-calligraphy.png" alt="پایگاه رسمی نشر آثار کربلایی حسین اردستانی"></div>
   </div></div>
 </section>
 
@@ -71,7 +71,7 @@
 
 <section id="video">
   <div class="wrap">
-    <div class="section-head"><div class="eyebrow">آثار تصویری</div><h2>آثار ویدیویی</h2><p>دیدن نماهنگ‌های تصویری کربلایی حسین اردستانی</p></div>
+    <div class="section-head"><h2>آثار ویدیویی</h2><p>دیدن نماهنگ‌های تصویری کربلایی حسین اردستانی</p></div>
     <div class="video-grid">
       <article class="video-card">
         <div class="video-frame"><iframe src="https://www.aparat.com/video/video/embed/videohash/pis9741/vt/frame" title="نماهنگ زهرای ایران - کربلایی حسین اردستانی" allow="autoplay; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
@@ -84,41 +84,37 @@
 
 <section id="audio" class="media-section">
   <div class="wrap">
-    <div class="section-head"><div class="eyebrow">نماهنگ‌های صوتی</div><h2>نماهنگ‌های صوتی</h2><p>شنیدن آثار صوتی کربلایی حسین اردستانی</p></div>
-    <div class="audio-library">
-      <article class="audio-card" data-audio-card data-src="assets/audio/labbaik-ya-khamenei.mp3">
-        <div class="audio-cover">
+    <div class="section-head"><h2>آثار صوتی</h2><p>شنیدن نماهنگ‌های صوتی کربلایی حسین اردستانی</p></div>
+    <div class="audio-library audio-library-large">
+      <article class="audio-card audio-card-large" data-audio-card data-src="assets/audio/labbaik-ya-khamenei.mp3">
+        <div class="audio-cover-large">
           <img src="assets/audio/labbaik-ya-khamenei.jpg" alt="کاور نماهنگ صوتی لبیک یا خامنه‌ای" loading="lazy">
+          <button class="audio-cover-play" type="button" disabled aria-label="پخش لبیک یا خامنه‌ای">▶</button>
         </div>
-        <div class="audio-main">
+        <div class="audio-main-large">
           <div class="audio-title-row">
-            <div>
-              <span>نماهنگ صوتی اول</span>
-              <h3>لبیک یا خامنه‌ای</h3>
-              <p>کربلایی حسین اردستانی</p>
-            </div>
+            <div><span>نماهنگ صوتی</span><h3>لبیک یا خامنه‌ای</h3><p>کربلایی حسین اردستانی</p></div>
             <button class="audio-play" type="button" disabled aria-label="پخش لبیک یا خامنه‌ای">▶</button>
           </div>
-          <div class="audio-progress" aria-hidden="true"><span class="audio-progress-bar"></span></div>
+          <div class="audio-progress audio-progress-large" role="slider" tabindex="0" aria-label="نوار پیشرفت لبیک یا خامنه‌ای"><span class="audio-progress-bar"></span></div>
           <div class="audio-times"><span>00:00</span><span>00:00</span></div>
+          <div class="audio-bottom-controls"><span class="audio-status">حالت پخش</span><button type="button" class="audio-reset" aria-label="بازنشانی پخش">↻</button></div>
         </div>
       </article>
 
-      <article class="audio-card" data-audio-card data-src="assets/audio/zahra-ye-iran.mp3">
-        <div class="audio-cover">
+      <article class="audio-card audio-card-large" data-audio-card data-src="assets/audio/zahra-ye-iran.mp3">
+        <div class="audio-cover-large">
           <img src="assets/audio/zahra-ye-iran.png" alt="کاور نماهنگ صوتی زهرای ایران" loading="lazy">
+          <button class="audio-cover-play" type="button" disabled aria-label="پخش زهرای ایران">▶</button>
         </div>
-        <div class="audio-main">
+        <div class="audio-main-large">
           <div class="audio-title-row">
-            <div>
-              <span>نماهنگ صوتی دوم</span>
-              <h3>زهرای ایران</h3>
-              <p>کربلایی حسین اردستانی</p>
-            </div>
+            <div><span>نماهنگ صوتی</span><h3>زهرای ایران</h3><p>کربلایی حسین اردستانی</p></div>
             <button class="audio-play" type="button" disabled aria-label="پخش زهرای ایران">▶</button>
           </div>
-          <div class="audio-progress" aria-hidden="true"><span class="audio-progress-bar"></span></div>
+          <div class="audio-progress audio-progress-large" role="slider" tabindex="0" aria-label="نوار پیشرفت زهرای ایران"><span class="audio-progress-bar"></span></div>
           <div class="audio-times"><span>00:00</span><span>00:00</span></div>
+          <div class="audio-bottom-controls"><span class="audio-status">حالت پخش</span><button type="button" class="audio-reset" aria-label="بازنشانی پخش">↻</button></div>
         </div>
       </article>
     </div>
@@ -127,7 +123,7 @@
 
 <section id="gallery">
   <div class="wrap">
-    <div class="section-head"><div class="eyebrow">تصاویر</div><h2>گالری تصاویر</h2><p>مشاهده تصاویر کربلایی حسین اردستانی</p></div>
+    <div class="section-head"><h2>گالری تصاویر</h2><p>مشاهده تصاویر کربلایی حسین اردستانی</p></div>
     <div class="gallery-slider" aria-label="اسلاید تصاویر">
       <button class="gallery-nav gallery-prev" type="button" aria-label="تصویر قبلی">‹</button>
       <div class="gallery-track">
@@ -149,10 +145,10 @@
 
 <section id="media">
   <div class="wrap">
-    <div class="section-head"><div class="eyebrow">رسانه‌های رسمی</div><h2>رسانه‌ها</h2><p>دسترسی به کانال ایتا و صفحه آپارات کربلایی حسین اردستانی</p></div>
+    <div class="section-head"><h2>رسانه‌ها</h2><p>دسترسی به کانال ایتا و صفحه آپارات کربلایی حسین اردستانی</p></div>
     <div class="media-grid">
-      <article class="media-card eitaa-card"><div class="media-icon">E</div><div><span>کانال رسمی</span><h3>ایتا</h3><p>اخبار، مجالس و محتوای منتشرشده در کانال رسمی.</p></div><a class="btn btn-gold" href="https://eitaa.com/hosain_Ardestani313" target="_blank" rel="noopener noreferrer">ورود به کانال ایتا ↗</a></article>
-      <article class="media-card aparat-card"><div class="media-icon">▶</div><div><span>صفحه رسمی</span><h3>آپارات</h3><p>نماهنگ‌ها، کلیپ‌ها و آثار ویدیویی منتشرشده.</p></div><a class="btn btn-red" href="https://www.aparat.com/hoseinardstani" target="_blank" rel="noopener noreferrer">ورود به صفحه آپارات ↗</a></article>
+      <article class="media-card eitaa-card"><div class="media-icon media-icon-image"><img src="assets/eitaa-icon.png" alt="نشان ایتا"></div><div><span>کانال رسمی</span><h3>ایتا</h3><p>اخبار، مجالس و محتوای منتشرشده در کانال رسمی.</p></div><a class="btn btn-gold" href="https://eitaa.com/hosain_Ardestani313" target="_blank" rel="noopener noreferrer">ورود به کانال ایتا ↗</a></article>
+      <article class="media-card aparat-card"><div class="media-icon media-icon-image"><img src="assets/aparat-icon.png" alt="نشان آپارات"></div><div><span>صفحه رسمی</span><h3>آپارات</h3><p>نماهنگ‌ها، کلیپ‌ها و آثار ویدیویی منتشرشده.</p></div><a class="btn btn-red" href="https://www.aparat.com/hoseinardstani" target="_blank" rel="noopener noreferrer">ورود به صفحه آپارات ↗</a></article>
     </div>
   </div>
 </section>
@@ -160,7 +156,7 @@
 <!-- درباره مداح عمداً در انتهای محتوای اصلی و پیش از Footer قرار گرفته است. -->
 <section id="about">
   <div class="wrap">
-    <div class="section-head"><div class="eyebrow">معرفی</div><h2>درباره مداح</h2><p>معرفی کوتاه کربلایی حسین اردستانی</p></div>
+    <div class="section-head"><h2>درباره مداح</h2><p>معرفی کوتاه کربلایی حسین اردستانی</p></div>
     <div class="about-panel">
       <p>کربلایی حسین اردستانی از دوران کودکی در محافل قرآنی و مجالس اهل‌بیت علیهم‌السلام حضور داشته و از همان سال‌ها با فضای قرآن، ذکر و مداحی انس گرفته است.</p>
       <p>این مسیر در طول سال‌های زندگی ادامه پیدا کرده و با حضور در مجالس مذهبی، به مدیحه‌سرایی و مرثیه‌خوانی اهل‌بیت علیهم‌السلام در شهر مقدس قم و استان های کشور پرداخته است.</p>
