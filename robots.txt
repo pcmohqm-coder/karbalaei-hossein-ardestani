@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
 
 Sitemap: https://pcmohqm-coder.github.io/karbalaei-hossein-ardestani/sitemap.xml
