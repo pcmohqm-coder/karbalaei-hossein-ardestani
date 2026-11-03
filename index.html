@@ -37,52 +37,42 @@
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<div class="ribbon" role="note"><span class="ar" lang="ar" dir="rtl">اَلسَّلَامُ عَلَيْكَ يَا أَبَا عَبْدِ اللَّهِ، وَ عَلَى الْأَرْوَاحِ الَّتِي حَلَّتْ بِفِنَائِكَ</span></div>
-<header class="site-header">
+<header class="site-header" id="site-header">
+  <div class="ribbon" role="note"><span class="ar" lang="ar" dir="rtl">اَلسَّلَامُ عَلَيْكَ يَا أَبَا عَبْدِ اللَّهِ<span class="more">، وَ عَلَى الْأَرْوَاحِ الَّتِي حَلَّتْ بِفِنَائِكَ</span></span></div>
   <div class="wrap header-top">
     <div class="header-figures" aria-hidden="true"><img src="assets/header-figures.jpg" alt=""></div>
     <a class="brand" href="#top" aria-label="کربلایی حسین اردستانی"><img src="assets/header-logo.jpg" alt="کربلایی حسین اردستانی"></a>
-    <button class="menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
+    <div class="header-flag" aria-hidden="true"><img src="assets/flag.png" alt=""></div>
   </div>
-  <nav id="main-nav" class="main-nav" aria-label="منوی اصلی"><div class="wrap">
-    <ul class="menu">
-      <li><a href="#events">اطلاعیه مراسم</a></li><li><a href="#video">آثار ویدیویی</a></li><li><a href="#audio">آثار صوتی</a></li><li><a href="#gallery">گالری تصاویر</a></li><li><a href="#media">رسانه‌ها</a></li><li><a href="#about">درباره مداح</a></li>
-    </ul>
-  </div></nav>
 </header>
+<button class="side-tab" id="side-tab" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="side-menu">☰</button>
+<div class="side-back" id="side-back"></div>
+<aside class="side-menu" id="side-menu" aria-label="منوی بخش‌ها">
+  <h3>بخش‌های سایت <button type="button" id="side-close" aria-label="بستن منو">✕</button></h3>
+  <a href="#video"><strong>آثار ویدیویی</strong><small>دیدن نماهنگ‌های تصویری</small></a>
+  <a href="#events"><strong>اطلاعیه مراسم</strong><small>برنامه‌ی امروز و دو روز آینده</small></a>
+  <a href="#audio"><strong>آثار صوتی</strong><small>شنیدن نماهنگ‌های صوتی</small></a>
+  <a href="#media"><strong>رسانه‌ها</strong><small>کانال ایتا و صفحه آپارات</small></a>
+  <a href="#about"><strong>درباره مداح</strong><small>معرفی و تصاویر</small></a>
+</aside>
 <main id="top">
-<section class="hero" style="padding:0" aria-label="کربلایی حسین اردستانی">
-  <div class="hero-slide is-active"><img class="hero-image" src="assets/hero.jpg" alt="کربلایی حسین اردستانی در حال مداحی" fetchpriority="high"></div>
-  <div class="hero-slide"><img class="hero-image" src="assets/hero-2.jpg" alt="کربلایی حسین اردستانی در مراسم مذهبی" loading="lazy"></div>
+<section class="hero" style="padding:0" aria-label="پایگاه رسمی کربلایی حسین اردستانی">
+  <div class="hero-stage">
+    <div class="hero-slide is-active" style="--pos:50% 25%"><img class="hero-image" src="assets/hero.jpg" alt="کربلایی حسین اردستانی در حال مداحی" fetchpriority="high"></div>
+    <div class="hero-slide" style="--pos:63% 35%"><img class="hero-image" src="assets/hero-2.jpg" alt="کربلایی حسین اردستانی در مراسم مذهبی" loading="lazy"></div>
+  </div>
   <div class="hero-content">
-    <h1>کربلایی حسین اردستانی</h1>
-    <p class="hero-sub">مداح اهل‌بیت علیهم‌السلام · پایگاه رسمی نشر آثار</p>
+    <h1>پایگاه رسمی نشر آثار <span>کربلایی حسین اردستانی</span></h1>
     <div class="hero-actions">
-      <a class="btn btn-red" href="#audio">شنیدن نماهنگ‌ها</a>
-      <a class="btn btn-ghost" href="#video">دیدن آثار ویدیویی</a>
+      <a class="btn btn-red" href="#audio">شنیدن آثار صوتی</a>
+      <a class="btn btn-ghost" href="#events">اطلاعیه مراسمات</a>
     </div>
   </div>
 </section>
 
-<!-- اطلاعیه مراسم: از assets/posters/posters.json خوانده می‌شود و فقط پوسترهای امروز تا ۲ روز آینده نمایش داده می‌شود. پنل مدیریت: admin.html -->
-<section id="events" class="events" aria-live="polite">
-  <div class="wrap">
-    <div class="sec-head reveal"><small>برنامه‌ها</small><h2>اطلاعیه مراسم‌های پیش‌رو</h2><p>برنامه‌ی امروز و دو روز آینده</p></div>
-    <div id="poster-grid" class="poster-grid"></div>
-    <p id="events-none" class="events-none" hidden>در حال حاضر مراسمی در دست برگزاری نیست؛ برنامه‌های پیش‌رو همین‌جا اعلام می‌شود.</p>
-  </div>
-</section>
-
-<section class="quick" aria-label="دسترسی سریع"><div class="wrap"><div class="quick-grid">
-  <a class="quick-card" href="#about"><div class="quick-icon">✦</div><div><strong>درباره مداح</strong><small>معرفی کوتاه</small></div></a>
-  <a class="quick-card" href="#video"><div class="quick-icon">▶</div><div><strong>آثار ویدیویی</strong><small>نماهنگ تصویری</small></div></a>
-  <a class="quick-card" href="#audio"><div class="quick-icon">♫</div><div><strong>آثار صوتی</strong><small>نماهنگ صوتی</small></div></a>
-  <a class="quick-card" href="#media"><div class="quick-icon">◈</div><div><strong>رسانه‌ها</strong><small>ایتا و آپارات</small></div></a>
-</div></div></section>
-
 <section id="video">
   <div class="wrap">
-    <div class="sec-head reveal"><small>نماهنگ</small><h2>آثار ویدیویی</h2><p>دیدن نماهنگ‌های تصویری کربلایی حسین اردستانی</p></div>
+    <div class="sec-head reveal"><h2>آثار ویدیویی</h2><p>دیدن نماهنگ‌های تصویری کربلایی حسین اردستانی</p></div>
     <div class="video-grid">
       <article class="video-card reveal">
         <div class="video-frame"><iframe src="https://www.aparat.com/video/video/embed/videohash/pis9741/vt/frame?v=20260921" title="نماهنگ زهرای ایران - کربلایی حسین اردستانی" allow="autoplay; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
@@ -97,9 +87,18 @@
   </div>
 </section>
 
+<!-- اطلاعیه مراسم: فقط پوسترهای بارگذاری‌شده از admin.html (امروز تا ۲ روز آینده) نمایش داده می‌شوند. بدون پوستر، فقط یک متن دیده می‌شود. -->
+<section id="events" class="events" aria-live="polite">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>اطلاعیه مراسم‌ها</h2><p>برنامه‌ی امروز و دو روز آینده</p></div>
+    <div id="poster-grid" class="poster-grid"></div>
+    <p id="events-none" class="events-none" hidden>در حال حاضر مراسمی در دست برگزاری نیست؛ برنامه‌های پیش‌رو همین‌جا اعلام می‌شود.</p>
+  </div>
+</section>
+
 <section id="audio" class="alt">
   <div class="wrap">
-    <div class="sec-head reveal"><small>نماهنگ</small><h2>آثار صوتی</h2><p>شنیدن نماهنگ‌های صوتی کربلایی حسین اردستانی</p></div>
+    <div class="sec-head reveal"><h2>آثار صوتی</h2><p>شنیدن نماهنگ‌های صوتی کربلایی حسین اردستانی</p></div>
     <div class="tracks">
       <article class="track" data-src="assets/audio/labbaik-ya-khamenei.mp3">
         <img src="assets/audio/labbaik-ya-khamenei.jpg" alt="کاور لبیک یا خامنه‌ای" loading="lazy">
@@ -130,31 +129,9 @@
   </div>
 </section>
 
-<section id="gallery">
+<section id="media">
   <div class="wrap">
-    <div class="sec-head reveal"><small>تصاویر</small><h2>گالری تصاویر</h2><p>لحظه‌هایی از محافل و مجالس اهل‌بیت علیهم‌السلام</p></div>
-    <div class="gallery-slider" aria-label="اسلاید تصاویر">
-      <button class="gallery-nav gallery-prev" type="button" aria-label="تصویر قبلی">‹</button>
-      <div class="gallery-track">
-        <figure class="gallery-slide is-active"><img src="assets/gallery/marasem-shabane-01.jpg" alt="مراسم شبانه - تصویر اول" loading="lazy"></figure>
-        <figure class="gallery-slide"><img src="assets/gallery/marasem-shabane-02.jpg" alt="مراسم شبانه - تصویر دوم" loading="lazy"></figure>
-        <figure class="gallery-slide"><img src="assets/gallery/marasem-shabane-03.jpg" alt="مراسم شبانه - تصویر سوم" loading="lazy"></figure>
-        <figure class="gallery-slide"><img src="assets/gallery/gallery-04.jpg" alt="کربلایی حسین اردستانی در حال مداحی - ۴" loading="lazy"></figure>
-        <figure class="gallery-slide"><img src="assets/gallery/gallery-05.jpg" alt="کربلایی حسین اردستانی در حال مداحی - ۵" loading="lazy"></figure>
-        <figure class="gallery-slide"><img src="assets/gallery/gallery-06.jpg" alt="کربلایی حسین اردستانی در حال مداحی - ۶" loading="lazy"></figure>
-        <figure class="gallery-slide"><img src="assets/gallery/gallery-07.jpg" alt="کربلایی حسین اردستانی در حال مداحی - ۷" loading="lazy"></figure>
-        <figure class="gallery-slide"><img src="assets/gallery/gallery-08.jpg" alt="کربلایی حسین اردستانی در حال مداحی - ۸" loading="lazy"></figure>
-        <figure class="gallery-slide"><img src="assets/gallery/gallery-09.jpg" alt="کربلایی حسین اردستانی در حال مداحی - ۹" loading="lazy"></figure>
-      </div>
-      <button class="gallery-nav gallery-next" type="button" aria-label="تصویر بعدی">›</button>
-      <div class="gallery-dots" role="tablist" aria-label="انتخاب تصویر"></div>
-    </div>
-  </div>
-</section>
-
-<section id="media" class="alt">
-  <div class="wrap">
-    <div class="sec-head reveal"><small>ارتباط</small><h2>رسانه‌ها</h2><p>کانال ایتا و صفحه آپارات کربلایی حسین اردستانی</p></div>
+    <div class="sec-head reveal"><h2>رسانه‌ها</h2><p>کانال ایتا و صفحه آپارات کربلایی حسین اردستانی</p></div>
     <div class="media-grid">
       <article class="media-card reveal"><div class="media-icon"><img src="assets/eitaa-icon.png" alt="نشان ایتا"></div><div><small>کانال رسمی</small><h3>ایتا</h3><p>اخبار، مجالس و محتوای منتشرشده در کانال رسمی.</p></div><a class="btn btn-gold" href="https://eitaa.com/hosain_Ardestani313" target="_blank" rel="noopener noreferrer">ورود به کانال ↗</a></article>
       <article class="media-card reveal"><div class="media-icon"><img src="assets/aparat-icon.png" alt="نشان آپارات"></div><div><small>صفحه رسمی</small><h3>آپارات</h3><p>نماهنگ‌ها، کلیپ‌ها و آثار ویدیویی منتشرشده.</p></div><a class="btn btn-red" href="https://www.aparat.com/hoseinardstani" target="_blank" rel="noopener noreferrer">ورود به آپارات ↗</a></article>
@@ -164,13 +141,29 @@
 
 <section id="about" class="about">
   <div class="wrap">
-    <div class="sec-head reveal"><small>معرفی</small><h2>درباره مداح</h2><p>کربلایی حسین اردستانی</p></div>
+    <div class="sec-head reveal"><h2>درباره مداح</h2><p>کربلایی حسین اردستانی</p></div>
     <div class="about-grid">
       <div class="about-text reveal">
         <p>کربلایی حسین اردستانی از دوران کودکی در محافل قرآنی و مجالس اهل‌بیت علیهم‌السلام حضور داشته و از همان سال‌ها با فضای قرآن، ذکر و مداحی انس گرفته است.</p>
         <p>این مسیر در طول سال‌های زندگی ادامه پیدا کرده و با حضور در مجالس مذهبی، به مدیحه‌سرایی و مرثیه‌خوانی اهل‌بیت علیهم‌السلام در شهر مقدس قم و استان‌های کشور پرداخته است.</p>
       </div>
-      <figure class="about-photo reveal"><img src="assets/about-maddah.jpg" alt="کربلایی حسین اردستانی" loading="lazy"></figure>
+      <div class="about-slider reveal" aria-label="اسلاید تصاویر">
+        <div class="gallery-track">
+        <figure class="gallery-slide is-active"><img src="assets/about-maddah.jpg" alt="کربلایی حسین اردستانی" style="object-position:50% 18%"></figure>
+        <figure class="gallery-slide"><img src="assets/gallery/marasem-shabane-01.jpg" alt="مراسم شبانه - تصویر اول" loading="lazy"></figure>
+        <figure class="gallery-slide"><img src="assets/gallery/marasem-shabane-02.jpg" alt="مراسم شبانه - تصویر دوم" loading="lazy"></figure>
+        <figure class="gallery-slide"><img src="assets/gallery/marasem-shabane-03.jpg" alt="مراسم شبانه - تصویر سوم" loading="lazy"></figure>
+        <figure class="gallery-slide"><img src="assets/gallery/gallery-04.jpg" alt="کربلایی حسین اردستانی در حال مداحی - 4" loading="lazy"></figure>
+        <figure class="gallery-slide"><img src="assets/gallery/gallery-05.jpg" alt="کربلایی حسین اردستانی در حال مداحی - 5" loading="lazy"></figure>
+        <figure class="gallery-slide"><img src="assets/gallery/gallery-06.jpg" alt="کربلایی حسین اردستانی در حال مداحی - 6" loading="lazy"></figure>
+        <figure class="gallery-slide"><img src="assets/gallery/gallery-07.jpg" alt="کربلایی حسین اردستانی در حال مداحی - 7" loading="lazy"></figure>
+        <figure class="gallery-slide"><img src="assets/gallery/gallery-08.jpg" alt="کربلایی حسین اردستانی در حال مداحی - 8" loading="lazy"></figure>
+        <figure class="gallery-slide"><img src="assets/gallery/gallery-09.jpg" alt="کربلایی حسین اردستانی در حال مداحی - 9" loading="lazy"></figure>
+        </div>
+        <button class="gallery-nav gallery-prev" type="button" aria-label="تصویر قبلی">‹</button>
+        <button class="gallery-nav gallery-next" type="button" aria-label="تصویر بعدی">›</button>
+        <div class="gallery-dots" role="tablist" aria-label="انتخاب تصویر"></div>
+      </div>
     </div>
   </div>
 </section>
