@@ -57,7 +57,6 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const closeLb = () => lb.classList.remove('open');
   lb.addEventListener('click', e => { if (e.target === lb || e.target.tagName === 'BUTTON') closeLb(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
-  const emptySlot = () => { const d = document.createElement('div'); d.className = 'slot empty'; d.innerHTML = '<div class="slot-img">جای پوستر مراسم</div><div class="slot-meta">&nbsp;</div>'; return d; };
   const render = list => {
     grid.innerHTML = '';
     list.slice(0, SLOTS).forEach(p => {
@@ -73,7 +72,6 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
       el.addEventListener('click', () => { lbi.src = img.src; lbi.alt = img.alt; lb.classList.add('open'); });
       grid.appendChild(el);
     });
-    for (let i = list.length; i < SLOTS; i++) grid.appendChild(emptySlot());
     none.hidden = list.length > 0;
   };
   render([]);
