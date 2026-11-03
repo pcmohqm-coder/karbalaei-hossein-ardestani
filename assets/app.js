@@ -2,21 +2,33 @@
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-/* هدر و منو */
+/* هدر ثابت: ارتفاع را برای فاصله‌ی بالای صفحه حساب می‌کند */
 (() => {
-  const header = $('#site-header'), toggle = $('.menu-toggle'), nav = $('#main-nav');
-  if (header) { const f = () => header.classList.toggle('scrolled', scrollY > 10); f(); addEventListener('scroll', f, { passive: true }); }
-  if (!toggle || !nav) return;
-  const close = () => { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'باز کردن منو'); };
-  toggle.addEventListener('click', () => { const o = nav.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(o)); toggle.setAttribute('aria-label', o ? 'بستن منو' : 'باز کردن منو'); });
-  $$('a', nav).forEach(a => a.addEventListener('click', close));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  const header = $('#site-header'); if (!header) return;
+  const set = () => document.documentElement.style.setProperty('--hh', header.offsetHeight + 'px');
+  set(); addEventListener('resize', set); addEventListener('load', set);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
 })();
 
-/* اسلاید تصاویر بالای صفحه */
+/* منوی کناری */
+(() => {
+  const tab = $('#side-tab'), menu = $('#side-menu'), back = $('#side-back'), close = $('#side-close'); if (!tab || !menu) return;
+  const set = o => { menu.classList.toggle('open', o); back.classList.toggle('open', o); tab.setAttribute('aria-expanded', String(o)); };
+  tab.onclick = () => set(!menu.classList.contains('open'));
+  close.onclick = back.onclick = () => set(false);
+  $$('a', menu).forEach(a => a.addEventListener('click', () => set(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+  const links = $$('a', menu), map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { links.forEach(l => l.classList.remove('on')); const l = map.get(e.target.id); if (l) l.classList.add('on'); } }), { rootMargin: '-40% 0px -55% 0px' });
+    map.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+  }
+})();
+
+/* اسلاید تصاویر بالای صفحه: هر ۱۰ ثانیه */
 (() => {
   const s = $$('.hero-slide'); if (s.length < 2) return;
-  let i = 0; setInterval(() => { s[i].classList.remove('is-active'); i = (i + 1) % s.length; s[i].classList.add('is-active'); }, 5500);
+  let i = 0; setInterval(() => { s[i].classList.remove('is-active'); i = (i + 1) % s.length; s[i].classList.add('is-active'); }, 10000);
 })();
 
 /* گالری */
@@ -34,7 +46,8 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   let x0 = null;
   track.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1)); x0 = null; });
-  document.addEventListener('keydown', e => { if (e.target.closest('input,textarea,[role=slider]')) return; if (e.key === 'ArrowRight') show(idx - 1); if (e.key === 'ArrowLeft') show(idx + 1); });
+  let timer = setInterval(() => show(idx + 1), 6000);
+  [prev, next, dots].forEach(el => el.addEventListener('click', () => { clearInterval(timer); timer = setInterval(() => show(idx + 1), 9000); }));
 })();
 
 /* نمایش نرم بخش‌ها */
